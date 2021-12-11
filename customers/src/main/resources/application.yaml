@@ -1,0 +1,20 @@
+spring:
+  r2dbc:
+    url: r2dbc:h2:mem://./testdb
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+        show_sql: true
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true # data.sql
+  sql:
+    init:
+      encoding: UTF-8
+      mode: always
+      data-locations: classpath*:data.sql
+server:
+  port: 8100
