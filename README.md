@@ -5,13 +5,13 @@
 - profiles
 - edge
 
-### Customer (8100)
+### Customer (7001)
 - Spring Boot R2dbc
 - Spring Boot Webflux
 - Kotlin (Java 17)
 - r2dbc-h2
 
-### Profiles (8181)
+### Profiles (7003)
 - RSocket
 - Spring Webflux
 - Kotlin (Java 17)

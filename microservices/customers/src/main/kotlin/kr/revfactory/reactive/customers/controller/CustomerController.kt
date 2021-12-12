@@ -1,6 +1,6 @@
 package kr.revfactory.reactive.customers.controller
 
-import kr.revfactory.reactive.customers.domain.Customer
+import kr.revfactory.api.core.domain.customer.Customer
 import kr.revfactory.reactive.customers.repository.CustomerRepository
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController

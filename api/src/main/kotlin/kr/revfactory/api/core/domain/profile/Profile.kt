@@ -1,4 +1,4 @@
-package kr.revfactory.reactive.profiles.domain
+package kr.revfactory.api.core.domain.profile
 
 import java.time.LocalDateTime
 

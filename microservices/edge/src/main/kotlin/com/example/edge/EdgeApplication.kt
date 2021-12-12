@@ -2,6 +2,8 @@ package com.example.edge
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kr.revfactory.api.core.domain.customer.Customer
+import kr.revfactory.api.core.domain.profile.Profile
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.bodyToFlow
-import java.util.*
 
 @SpringBootApplication
 class EdgeApplication
@@ -25,15 +26,13 @@ fun main(args: Array<String>) {
 	runApplication<EdgeApplication>(*args)
 }
 
-data class Customer(val id: Int, val name: String)
-data class Profile(val id: Int, val registered: Date)
 data class CustomerProfile(val customer: Customer, val profile: Profile)
 
 @Configuration
 class CrmConfiguration {
 
 	@Bean
-	fun rsocket(rsb: RSocketRequester.Builder) = rsb.tcp("localhost", 8181)
+	fun rsocket(rsb: RSocketRequester.Builder) = rsb.tcp("localhost", 7003)
 
 	@Bean
 	fun http(wcb: WebClient.Builder) = wcb.build()
@@ -45,10 +44,10 @@ class CrmClient(
 	private val rsocket: RSocketRequester
 ) {
 	suspend fun customers(): Flow<Customer> =
-		this.http.get().uri("http://localhost:8100/customers").retrieve()
+		this.http.get().uri("http://localhost:7001/customers").retrieve()
 			.bodyToFlow()
 
-	suspend fun profileFor(customerId: Int): Profile =
+	suspend fun profileFor(customerId: Long): Profile =
 		this.rsocket.route("profiles.{cid}", customerId)
 			.retrieveAndAwait()
 
@@ -63,7 +62,7 @@ class CrmClient(
 @Controller
 class CrmGraphqlController(private val crm: CrmClient) {
 	@SchemaMapping(typeName = "Profile")
-	fun registered(p: Profile): String = p.registered.toGMTString()
+	fun registered(p: Profile): String = p.registered.toString()
 
 	@SchemaMapping(typeName = "Customer")
 	suspend fun profile(c: Customer) = this.crm.profileFor(c.id)

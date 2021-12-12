@@ -17,4 +17,4 @@ spring:
       mode: always
       data-locations: classpath*:data.sql
 server:
-  port: 8100
+  port: 7001

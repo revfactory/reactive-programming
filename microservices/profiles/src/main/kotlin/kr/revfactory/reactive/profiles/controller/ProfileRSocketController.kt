@@ -1,6 +1,6 @@
 package kr.revfactory.reactive.profiles.controller
 
-import kr.revfactory.reactive.profiles.domain.Profile
+import kr.revfactory.api.core.domain.profile.Profile
 import org.springframework.messaging.handler.annotation.DestinationVariable
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.stereotype.Controller
