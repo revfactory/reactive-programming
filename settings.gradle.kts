@@ -1,5 +1,6 @@
 include(
-    "edge",
-    "customers",
-    "profiles"
+    "api",
+    ":microservices:edge",
+    ":microservices:customers",
+    ":microservices:profiles"
 )
