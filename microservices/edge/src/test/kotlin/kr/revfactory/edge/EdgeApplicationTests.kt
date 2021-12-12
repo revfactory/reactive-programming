@@ -1,4 +1,4 @@
-package com.example.edge
+package kr.revfactory.edge
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
